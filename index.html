@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- QRCode.js library -->
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>QR Code Generator</h1>
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle" />
+        <span class="slider"></span>
+      </label>
+    </header>
+    <main class="container">
+      <section class="card">
+        <div class="input-section">
+          <input type="text" id="urlInput" placeholder="Enter a URL" />
+          <button id="generateBtn">Generate</button>
+        </div>
+        <section class="qr-section">
+          <div id="qrcode"></div>
+          <button id="downloadBtn" style="display: none">Download</button>
+        </section>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>
+        Made with ♥ &bull;
+        <a
+          href="https://github.com/AliAlshaheen/QR-Code-Generator"
+          target="_blank"
+          >AliAlshaheen</a
+        >
+        &bull;
+        <a href="https://github.com/davidshimjs/qrcodejs" target="_blank"
+          >QRCode.js</a
+        >
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

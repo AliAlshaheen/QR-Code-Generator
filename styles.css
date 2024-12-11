@@ -1,0 +1,224 @@
+:root {
+  --font-family: "Poppins", sans-serif;
+
+  /* Light Mode Colors */
+  --bg-color-light: #ffffff;
+  --text-color-light: #333;
+  --card-bg-light: #ffffff;
+  --gradient-light: linear-gradient(135deg, #ffffff 0%, #ffe5cc 100%);
+  --border-color-light: #ffa500;
+
+  /* Dark Mode Colors */
+  --bg-color-dark: #000000;
+  --text-color-dark: #f1f1f1;
+  --card-bg-dark: #1a1a1a;
+
+  --gradient-dark: linear-gradient(135deg, #000000 0%, #2c1c0c 100%);
+  --border-color-dark: #ffa500;
+
+  --primary-color: #ffa500;
+  --primary-hover: #e69500;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background: var(--gradient-light);
+  color: var(--text-color-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark-mode {
+  background: var(--gradient-dark);
+  color: var(--text-color-dark);
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background-color: #666;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.card {
+  background-color: var(--card-bg-light);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid var(--border-color-light);
+}
+
+.dark-mode .card {
+  background-color: var(--card-bg-dark);
+  border-color: var(--border-color-dark);
+}
+
+.input-section {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#urlInput {
+  flex: 1;
+  padding: 0.7rem;
+  border: 1px solid var(--border-color-light);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+#urlInput:focus {
+  border: 1px solid var(--primary-color);
+}
+
+.dark-mode #urlInput {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+  border: 1px solid var(--border-color-dark);
+}
+
+#generateBtn,
+#downloadBtn {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#generateBtn:hover,
+#downloadBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#qrcode {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border-color-light);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.dark-mode #qrcode {
+  background: #1a1a1a;
+  border-color: var(--border-color-dark);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  #urlInput {
+    font-size: 0.9rem;
+  }
+
+  #generateBtn,
+  #downloadBtn {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .header h1 {
+    font-size: 1.25rem;
+  }
+}
