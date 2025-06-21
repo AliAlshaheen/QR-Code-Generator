@@ -3,52 +3,192 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QR Code Generator</title>
-    <!-- Google Fonts -->
+    <title>Quantum QR Generator | Reality-Bending Codes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!-- QRCode.js library -->
     <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
   </head>
   <body>
+    <canvas id="particleCanvas"></canvas>
+    
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    
+    <div class="grid-overlay"></div>
+    
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+    
     <header class="header">
-      <h1>QR Code Generator</h1>
-      <label class="theme-switch">
-        <input type="checkbox" id="themeToggle" />
-        <span class="slider"></span>
-      </label>
-    </header>
-    <main class="container">
-      <section class="card">
-        <div class="input-section">
-          <input type="text" id="urlInput" placeholder="Enter a URL" />
-          <button id="generateBtn">Generate</button>
+      <div class="logo-wrapper">
+        <h1 class="logo">
+          <span class="logo-letter" style="--i: 0">Q</span>
+          <span class="logo-letter" style="--i: 1">R</span>
+          <span class="logo-letter glitch" data-text="Code"> Code</span>
+          <span class="logo-letter" style="--i: 2">G</span>
+          <span class="logo-letter" style="--i: 3">e</span>
+          <span class="logo-letter" style="--i: 4">n</span>
+          <span class="logo-letter" style="--i: 5">e</span>
+          <span class="logo-letter" style="--i: 6">r</span>
+          <span class="logo-letter" style="--i: 7">a</span>
+          <span class="logo-letter" style="--i: 8">t</span>
+          <span class="logo-letter" style="--i: 9">o</span>
+          <span class="logo-letter" style="--i: 10">r</span>
+        </h1>
+      </div>
+      <div class="controls">
+        <button class="mode-btn" id="modeBtn" aria-label="Toggle advanced mode">
+          <span class="mode-icon">🚀</span>
+          <span class="mode-text">Advanced</span>
+        </button>
         </div>
+    </header>
+    
+    <main class="container">
+      <div class="hero-text">
+        <p class="hero-subtitle">Transform your URLs into</p>
+        <p class="hero-title">Quantum-Encoded Portals</p>
+      </div>
+      
+      <section class="card main-card">
+        <div class="card-glow"></div>
+        <div class="input-section">
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="urlInput" 
+              placeholder="Enter your reality coordinates..."
+              autocomplete="off"
+            />
+            <div class="input-effects">
+              <span class="input-border"></span>
+              <span class="input-highlight"></span>
+            </div>
+          </div>
+          <button id="generateBtn" class="generate-btn">
+            <span class="btn-text">Generate</span>
+            <span class="btn-icon">⚡</span>
+            <div class="btn-effects"></div>
+          </button>
+        </div>
+        
+        <div class="advanced-options" id="advancedOptions">
+          <h3 class="options-title">Quantum Parameters</h3>
+          <div class="options-grid">
+            <div class="option-group">
+                <label for="sizeSlider">Dimension Size</label>
+                <input type="range" id="sizeSlider" min="128" max="512" value="256" step="64">
+                <span id="sizeValue">256px</span>
+            </div>
+            <div class="option-group">
+                <label for="errorCorrection">Error Correction</label>
+                <select id="errorCorrection">
+                    <option value="L">Low (7%)</option>
+                    <option value="M">Medium (15%)</option>
+                    <option value="Q">Quartile (25%)</option>
+                    <option value="H" selected>High (30%)</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="colorDark">Dark Pixels</label>
+                <input type="color" id="colorDark" value="#000000">
+            </div>
+            <div class="option-group">
+                <label for="colorLight">Light Pixels</label>
+                <input type="color" id="colorLight" value="#ffffff">
+            </div>
+          </div>
+        </div>
+        
         <section class="qr-section">
-          <div id="qrcode"></div>
-          <button id="downloadBtn" style="display: none">Download</button>
+          <div class="qr-container">
+            <div class="qr-placeholder" id="qrPlaceholder">
+              <div class="placeholder-animation">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <span class="placeholder-text">Your QR code will materialize here</span>
+              </div>
+            </div>
+            <div id="qrcode" class="qr-code-wrapper"></div>
+            <div class="qr-effects">
+              <div class="scan-line"></div>
+              <div class="corner corner-tl"></div>
+              <div class="corner corner-tr"></div>
+              <div class="corner corner-bl"></div>
+              <div class="corner corner-br"></div>
+            </div>
+          </div>
+          
+          <div class="action-buttons" id="actionButtons">
+            <button id="downloadBtn" class="action-btn download-btn">
+              <span class="btn-text">Download</span>
+              <span class="btn-icon">💾</span>
+            </button>
+            <button id="shareBtn" class="action-btn share-btn">
+              <span class="btn-text">Share</span>
+              <span class="btn-icon">📤</span>
+            </button>
+            <button id="copyBtn" class="action-btn copy-btn">
+              <span class="btn-text">Copy URL</span>
+              <span class="btn-icon">📋</span>
+            </button>
+          </div>
         </section>
+        
+        <div class="history-section" id="historySection">
+          <h3 class="history-title">Recent Portals</h3>
+          <div class="history-grid" id="historyGrid">
+            </div>
+        </div>
       </section>
+      
+      <div class="stats-card">
+        <div class="stat-item">
+          <span class="stat-value" id="totalGenerated">0</span>
+          <span class="stat-label">Codes Generated</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="currentSession">0</span>
+          <span class="stat-label">This Session</span>
+        </div>
+      </div>
     </main>
+    
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <div id="particleContainer"></div>
+    
     <footer class="footer">
-      <p>
-        Made with ♥ &bull;
-        <a
-          href="https://github.com/AliAlshaheen/QR-Code-Generator"
-          target="_blank"
-          >AliAlshaheen</a
-        >
-        &bull;
-        <a href="https://github.com/davidshimjs/qrcodejs" target="_blank"
-          >QRCode.js</a
-        >
-      </p>
+      <div class="footer-content">
+        <p class="footer-text">
+          Crafted with <span class="heart">❤️</span> by
+          <a
+            href="https://github.com/AliAlshaheen"
+            target="_blank"
+            class="footer-link"
+            >Ali Alshaheen</a
+          >
+        </p>
+        <div class="footer-links">
+          <a href="https://github.com/AliAlshaheen/QR-Code-Generator" target="_blank" class="footer-link">
+            <span class="link-icon">🐙</span>
+            Source
+          </a>
+          <a href="https://github.com/davidshimjs/qrcodejs" target="_blank" class="footer-link">
+            <span class="link-icon">📚</span>
+            QRCode.js
+          </a>
+        </div>
+      </div>
     </footer>
+    
     <script src="script.js"></script>
   </body>
 </html>
